@@ -29,7 +29,7 @@ export function getDevices (value = 1) {
       }))
       .catch(function(error) {
         console.log('Request failed', error)
-      });
+      })
     }, 200)
   }
 }
