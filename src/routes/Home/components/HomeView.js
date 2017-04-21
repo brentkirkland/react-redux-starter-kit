@@ -1,15 +1,40 @@
 import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
 import './HomeView.scss'
 
-export const HomeView = () => (
-  <div>
-    <h4>Welcome!</h4>
-    <img
-      alt='This is a duck, because Redux!'
-      className='duck'
-      src={DuckImage} />
-  </div>
-)
+class HomeView extends React.Component {
+
+  static propTypes = {
+    homeview  : React.PropTypes.object.isRequired,
+    devices   : React.PropTypes.func.isRequired
+  }
+
+  componentDidMount () {
+    this.props.devices()
+  }
+
+  render () {
+    return (
+      <div>
+        <h4>Devices</h4>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Temp</th>
+            <th>Humidity</th>
+            <th>Watered</th>
+            <th>Updated</th>
+          </tr>
+          <tr>
+            <td>{this.props.homeview.data[0].device_id || '-'}</td>
+            <td>{this.props.homeview.data[0].last_temp || '-'}</td>
+            <td>{this.props.homeview.data[0].last_humidity || '-'}</td>
+            <td>{this.props.homeview.data[0].last_watered || '-'}</td>
+            <td>{Date(this.props.homeview.data[0].last_updated).toString() || '-'}</td>
+          </tr>
+        </table>
+      </div>
+    )
+  }
+}
 
 export default HomeView

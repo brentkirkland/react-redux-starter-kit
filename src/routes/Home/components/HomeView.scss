@@ -3,3 +3,14 @@
   width: 120px;
   margin: 1.5rem auto;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
