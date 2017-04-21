@@ -16,9 +16,9 @@ export function getDevices (value = 1) {
     setTimeout(() => {
       var data = {
         method: 'GET',
-        mode: 'no-cors',
         headers: {
-          'Access-Control-Allow-Origin':'*'
+          'Access-Control-Allow-Origin':'*',
+          'Content-type': 'text/plain'
         }
       }
       return fetch('https://us-central1-slurp-165217.cloudfunctions.net/getDevices', data)
