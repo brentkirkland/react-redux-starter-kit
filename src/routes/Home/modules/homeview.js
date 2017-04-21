@@ -16,6 +16,7 @@ export function getDevices (value = 1) {
     setTimeout(() => {
       var data = {
         method: 'GET',
+        mode: 'no-cors',
         headers: {
           'Access-Control-Allow-Origin':'*'
         }
