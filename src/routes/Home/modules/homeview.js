@@ -15,7 +15,10 @@ export function getDevices (value = 1) {
   return (dispatch, getState) => {
     setTimeout(() => {
       var data = {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+          'Access-Control-Allow-Origin':'*'
+        }
       }
       return fetch('https://us-central1-slurp-165217.cloudfunctions.net/getDevices', data)
       .then(res => res.json())
@@ -23,6 +26,9 @@ export function getDevices (value = 1) {
         type    : GET_DEVICES,
         payload : json
       }))
+      .catch(function(error) {
+        console.log('Request failed', error)
+      });
     }, 200)
   }
 }

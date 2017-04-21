@@ -16,7 +16,8 @@ export function getSoilMeasures (value = 1) {
   return (dispatch, getState) => {
     setTimeout(() => {
       var data = {
-        method: 'GET'
+        method: 'GET',
+        'Access-Control-Allow-Origin':'*'
       }
       var url = 'https://us-central1-slurp-165217.cloudfunctions.net/getSoilMeasures' + '?devide_id=' + value + '&limit=120'
       return fetch(url, data)
