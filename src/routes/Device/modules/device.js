@@ -1,7 +1,7 @@
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const GET_DEVICES = 'GET_DEVICES'
+export const GET_SOIL_MEASURES = 'GET_SOIL_MEASURES'
 
 // ------------------------------------
 // Actions
@@ -11,16 +11,18 @@ export const GET_DEVICES = 'GET_DEVICES'
     returns a function for lazy evaluation. It is incredibly useful for
     creating async actions, especially when combined with redux-thunk! */
 
-export function getDevices (value = 1) {
+export function getSoilMeasures (value = 1) {
+  console.log(value);
   return (dispatch, getState) => {
     setTimeout(() => {
       var data = {
         method: 'GET'
       }
-      return fetch('https://us-central1-slurp-165217.cloudfunctions.net/getDevices', data)
+      var url = 'https://us-central1-slurp-165217.cloudfunctions.net/getSoilMeasures' + '?devide_id=' + value + '&limit=120'
+      return fetch(url, data)
       .then(res => res.json())
       .then(json => dispatch({
-        type    : GET_DEVICES,
+        type    : GET_SOIL_MEASURES,
         payload : json
       }))
     }, 200)
@@ -28,14 +30,14 @@ export function getDevices (value = 1) {
 }
 
 export const actions = {
-  getDevices
+  getSoilMeasures
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [GET_DEVICES] : (state, action) => {
+  [GET_SOIL_MEASURES] : (state, action) => {
     var object = {
       data: action.payload[0]
     }
@@ -49,9 +51,9 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  data: [{device_id: '-', last_temp: '-', last_humidity: '-', last_watered: Date.now(), last_updated: Date.now()}]
+  data: [{temp: '-', humidity: '-', published_at: Date.now()}]
 }
-export default function homeviewReducer (state = initialState, action) {
+export default function deviceReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
